@@ -269,6 +269,23 @@ function App() {
         </div>
 
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center">
+          {/* Overline badge */}
+          <motion.div
+            className="bezel mb-8 flex items-center gap-2.5 rounded-full px-4 py-1.5 backdrop-blur-sm"
+            style={{ background: 'var(--bg-card)' }}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
+              Available for Work
+            </span>
+          </motion.div>
+
           {/* Name */}
           <h1 className="flex flex-wrap justify-center text-4xl font-bold tracking-tight sm:text-5xl md:text-7xl">
             {NAME.split('').map((char, i) => (
@@ -292,10 +309,11 @@ function App() {
           </motion.p>
 
           {/* Bento info cards */}
-          <div className="relative mt-10 grid w-full max-w-4xl grid-cols-3 gap-4 sm:mt-14 sm:gap-5">
+          <div className="relative mt-10 grid w-full max-w-4xl grid-cols-2 gap-4 sm:mt-14 sm:gap-5 md:grid-cols-4">
             {/* Radial glow behind cards */}
             <div aria-hidden="true" className="pointer-events-none absolute -inset-12 -z-10 rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(167,139,250,0.12)_0%,transparent_70%)]" />
             {[
+              { label: 'Status', value: 'Available for Work', dot: true },
               { label: 'Location', value: 'Berlin, Germany', dot: false },
               { label: 'Role', value: 'Building GenAI Products', dot: false },
               { label: 'Education', value: 'M.Sc. Data Science', dot: false },
