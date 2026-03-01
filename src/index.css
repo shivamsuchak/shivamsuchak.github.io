@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Theme CSS variables ─── */
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(139, 92, 246, 0.2);
+  --text-primary: #fafafa;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+  --text-faint: #525252;
+  --fade-color: #09090b;
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --modal-bg: #0a0a0a;
+  --selection-bg: rgba(167, 139, 250, 0.25);
+  --selection-color: #fff;
+  --bezel-border: rgba(255, 255, 255, 0.10);
+  --bezel-shadow-1: rgba(255, 255, 255, 0.08);
+  --bezel-shadow-2: rgba(255, 255, 255, 0.03);
+  --bezel-shadow-3: rgba(255, 255, 255, 0.04);
+  --bezel-shadow-4: rgba(0, 0, 0, 0.4);
+  --skill-card-bg: rgba(23, 23, 23, 0.8);
+  --tooltip-bg: #262626;
+  --navbar-bg: rgba(10, 10, 10, 0.8);
+  --char-glow-base: rgb(115, 115, 115);
+  --char-glow-peak: rgb(197, 189, 250);
+}
+
+.light {
+  --bg-primary: #f8f8f8;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --bg-card-hover: rgba(0, 0, 0, 0.06);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(139, 92, 246, 0.25);
+  --text-primary: #18181b;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --text-faint: #a3a3a3;
+  --fade-color: #f8f8f8;
+  --overlay-bg: rgba(255, 255, 255, 0.85);
+  --modal-bg: #ffffff;
+  --selection-bg: rgba(139, 92, 246, 0.2);
+  --selection-color: #18181b;
+  --bezel-border: rgba(0, 0, 0, 0.08);
+  --bezel-shadow-1: rgba(0, 0, 0, 0.04);
+  --bezel-shadow-2: rgba(0, 0, 0, 0.02);
+  --bezel-shadow-3: rgba(0, 0, 0, 0.03);
+  --bezel-shadow-4: rgba(0, 0, 0, 0.08);
+  --skill-card-bg: rgba(255, 255, 255, 0.9);
+  --tooltip-bg: #ffffff;
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --char-glow-base: rgb(115, 115, 115);
+  --char-glow-peak: rgb(109, 40, 217);
+}
+
+html {
+  background: var(--bg-primary);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-color);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Bezel card effect — thick border + rotating shine on hover */
+.bezel {
+  position: relative;
+  border: 2px solid var(--bezel-border);
+  box-shadow:
+    inset 0 1px 0 0 var(--bezel-shadow-1),
+    inset 0 -1px 0 0 var(--bezel-shadow-2),
+    0 0 0 1px var(--bezel-shadow-3),
+    0 4px 12px var(--bezel-shadow-4);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bezel::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--shine-angle, 0deg),
+    transparent 0%,
+    transparent 70%,
+    rgba(167, 139, 250, 0.6) 78%,
+    rgba(255, 255, 255, 0.8) 82%,
+    rgba(167, 139, 250, 0.6) 86%,
+    transparent 94%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bezel:hover::before {
+  opacity: 1;
+  animation: bezel-shine 2.5s linear infinite;
+}
+
+@keyframes bezel-shine {
+  from { --shine-angle: 0deg; }
+  to { --shine-angle: 360deg; }
+}
+
+@property --shine-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Idle char-by-char glow wave for ShimmerText */
+@keyframes char-glow {
+  0%, 20%, 100% { color: var(--char-glow-base); }
+  10% { color: var(--char-glow-peak); text-shadow: 0 0 8px rgba(167, 139, 250, 0.4); }
+}
+
+.char-idle-glow {
+  animation: char-glow 4s ease-in-out infinite;
+}
+
+
