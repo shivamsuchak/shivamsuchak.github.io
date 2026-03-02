@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 
 /* ─── Skill data ─── */
@@ -12,42 +12,42 @@ interface Skill {
 const SKILLS: Skill[][] = [
   // Row 1
   [
-    { name: 'Python', icon: 'https://cdn.simpleicons.org/python/3776AB', color: '#3776AB' },
-    { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6', color: '#3178C6' },
-    { name: 'Java', icon: 'https://cdn.simpleicons.org/openjdk/ED8B00', color: '#ED8B00' },
-    { name: 'React', icon: 'https://cdn.simpleicons.org/react/61DAFB', color: '#61DAFB' },
-    { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', color: '#5FA04E' },
-    { name: 'FastAPI', icon: 'https://cdn.simpleicons.org/fastapi/009688', color: '#009688' },
-    { name: 'GraphQL', icon: 'https://cdn.simpleicons.org/graphql/E10098', color: '#E10098' },
+    { name: 'Python', icon: '/icons/python.svg', color: '#3776AB' },
+    { name: 'TypeScript', icon: '/icons/typescript.svg', color: '#3178C6' },
+    { name: 'Java', icon: '/icons/java.svg', color: '#ED8B00' },
+    { name: 'React', icon: '/icons/react.svg', color: '#61DAFB' },
+    { name: 'Node.js', icon: '/icons/nodejs.svg', color: '#5FA04E' },
+    { name: 'FastAPI', icon: '/icons/fastapi.svg', color: '#009688' },
+    { name: 'GraphQL', icon: '/icons/graphql.svg', color: '#E10098' },
   ],
   // Row 2
   [
-    { name: 'LangChain', icon: 'https://cdn.simpleicons.org/langchain/65C8CB', color: '#65C8CB' },
-    { name: 'OpenAI', icon: 'https://cdn.simpleicons.org/openai/ffffff', color: '#ffffff' },
-    { name: 'PyTorch', icon: 'https://cdn.simpleicons.org/pytorch/EE4C2C', color: '#EE4C2C' },
-    { name: 'TensorFlow', icon: 'https://cdn.simpleicons.org/tensorflow/FF6F00', color: '#FF6F00' },
-    { name: 'Hugging Face', icon: 'https://cdn.simpleicons.org/huggingface/FFD21E', color: '#FFD21E' },
-    { name: 'Pandas', icon: 'https://cdn.simpleicons.org/pandas/E70488', color: '#E70488' },
-    { name: 'NumPy', icon: 'https://cdn.simpleicons.org/numpy/4DABCF', color: '#4DABCF' },
-    { name: 'Scikit-learn', icon: 'https://cdn.simpleicons.org/scikitlearn/F7931E', color: '#F7931E' },
-    { name: 'MLflow', icon: 'https://cdn.simpleicons.org/mlflow/0194E2', color: '#0194E2' },
-    { name: 'Jupyter', icon: 'https://cdn.simpleicons.org/jupyter/F37626', color: '#F37626' },
-    { name: 'Matplotlib', icon: 'https://cdn.simpleicons.org/scipy/8CAAE6', color: '#8CAAE6' },
-    { name: 'gRPC', icon: 'https://cdn.simpleicons.org/grpc/244c5a', color: '#244c5a' },
+    { name: 'LangChain', icon: '/icons/langchain.svg', color: '#65C8CB' },
+    { name: 'OpenAI', icon: '/icons/openai.svg', color: '#ffffff' },
+    { name: 'PyTorch', icon: '/icons/pytorch.svg', color: '#EE4C2C' },
+    { name: 'TensorFlow', icon: '/icons/tensorflow.svg', color: '#FF6F00' },
+    { name: 'Hugging Face', icon: '/icons/huggingface.svg', color: '#FFD21E' },
+    { name: 'Pandas', icon: '/icons/pandas.svg', color: '#E70488' },
+    { name: 'NumPy', icon: '/icons/numpy.svg', color: '#4DABCF' },
+    { name: 'Scikit-learn', icon: '/icons/scikitlearn.svg', color: '#F7931E' },
+    { name: 'MLflow', icon: '/icons/mlflow.svg', color: '#0194E2' },
+    { name: 'Jupyter', icon: '/icons/jupyter.svg', color: '#F37626' },
+    { name: 'Matplotlib', icon: '/icons/matplotlib.svg', color: '#8CAAE6' },
+    { name: 'gRPC', icon: '/icons/grpc.svg', color: '#244c5a' },
   ],
   // Row 3
   [
-    { name: 'Docker', icon: 'https://cdn.simpleicons.org/docker/2496ED', color: '#2496ED' },
-    { name: 'Kubernetes', icon: 'https://cdn.simpleicons.org/kubernetes/326CE5', color: '#326CE5' },
-    { name: 'AWS', icon: 'https://cdn.simpleicons.org/amazonwebservices/FF9900', color: '#FF9900' },
-    { name: 'Azure', icon: 'https://cdn.simpleicons.org/microsoftazure/0078D4', color: '#0078D4' },
-    { name: 'GCP', icon: 'https://cdn.simpleicons.org/googlecloud/4285F4', color: '#4285F4' },
-    { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql/4169E1', color: '#4169E1' },
-    { name: 'MongoDB', icon: 'https://cdn.simpleicons.org/mongodb/47A248', color: '#47A248' },
-    { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032', color: '#F05032' },
-    { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/ffffff', color: '#ffffff' },
-    { name: 'Linux', icon: 'https://cdn.simpleicons.org/linux/FCC624', color: '#FCC624' },
-    { name: 'Terraform', icon: 'https://cdn.simpleicons.org/terraform/844FBA', color: '#844FBA' },
+    { name: 'Docker', icon: '/icons/docker.svg', color: '#2496ED' },
+    { name: 'Kubernetes', icon: '/icons/kubernetes.svg', color: '#326CE5' },
+    { name: 'AWS', icon: '/icons/aws.svg', color: '#FF9900' },
+    { name: 'Azure', icon: '/icons/azure.svg', color: '#0078D4' },
+    { name: 'GCP', icon: '/icons/gcp.svg', color: '#4285F4' },
+    { name: 'PostgreSQL', icon: '/icons/postgresql.svg', color: '#4169E1' },
+    { name: 'MongoDB', icon: '/icons/mongodb.svg', color: '#47A248' },
+    { name: 'Git', icon: '/icons/git.svg', color: '#F05032' },
+    { name: 'GitHub', icon: '/icons/github.svg', color: '#ffffff' },
+    { name: 'Linux', icon: '/icons/linux.svg', color: '#FCC624' },
+    { name: 'Terraform', icon: '/icons/terraform.svg', color: '#844FBA' },
   ],
 ]
 
@@ -64,6 +64,7 @@ function SkillCard({
   colIndex: number
   progress: MotionValue<number>
 }) {
+  const [imgError, setImgError] = useState(false)
   // Deterministic scatter offsets per card
   const seed = rowIndex * 12 + colIndex
   const scatterX = ((seed * 7 + 13) % 61) - 30  // -30 to 30
@@ -98,23 +99,19 @@ function SkillCard({
         }}
         transition={{ duration: 0.25 }}
       >
-        <img
-          src={skill.icon}
-          alt={skill.name}
-          className="h-6 w-6 object-contain sm:h-7 sm:w-7 md:h-8 md:w-8"
-          loading="lazy"
-          onError={(e) => {
-            const t = e.target as HTMLImageElement
-            t.style.display = 'none'
-            if (t.parentElement) {
-              const fallback = document.createElement('span')
-              fallback.className = 'text-xs font-bold'
-              fallback.style.color = 'var(--text-muted)'
-              fallback.textContent = skill.name.slice(0, 2)
-              t.parentElement.appendChild(fallback)
-            }
-          }}
-        />
+        {imgError ? (
+          <span className="text-xs font-bold" style={{ color: 'var(--text-muted)' }}>
+            {skill.name.slice(0, 2)}
+          </span>
+        ) : (
+          <img
+            src={skill.icon}
+            alt={skill.name}
+            className="h-6 w-6 object-contain sm:h-7 sm:w-7 md:h-8 md:w-8"
+            loading="lazy"
+            onError={() => setImgError(true)}
+          />
+        )}
       </motion.div>
 
       {/* Tooltip on hover */}

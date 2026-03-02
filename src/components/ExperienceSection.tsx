@@ -257,6 +257,7 @@ function ExperienceCard({
   onHover: (hovered: boolean) => void
 }) {
   const [isHovered, setIsHovered] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   return (
     <motion.div
@@ -287,24 +288,19 @@ function ExperienceCard({
 
         {/* Company logo */}
         <div className="absolute inset-0 flex items-center justify-center p-10 sm:p-14">
-          <img
-            src={exp.logo}
-            alt={exp.company}
-            className="max-h-full max-w-[60%] object-contain opacity-80 drop-shadow-lg transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
-            style={exp.logoFilter ? { filter: exp.logoFilter } : undefined}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement
-              target.style.display = 'none'
-              if (target.parentElement) {
-                const fallback = document.createElement('span')
-                fallback.className =
-                  'select-none text-[8rem] font-bold leading-none opacity-[0.08] sm:text-[10rem]'
-                fallback.style.color = '#ffffff'
-                fallback.textContent = exp.company.charAt(0)
-                target.parentElement.appendChild(fallback)
-              }
-            }}
-          />
+          {imgError ? (
+            <span className="select-none text-[8rem] font-bold leading-none opacity-[0.08] sm:text-[10rem]" style={{ color: '#ffffff' }}>
+              {exp.company.charAt(0)}
+            </span>
+          ) : (
+            <img
+              src={exp.logo}
+              alt={exp.company}
+              className="max-h-full max-w-[60%] object-contain opacity-80 drop-shadow-lg transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
+              style={exp.logoFilter ? { filter: exp.logoFilter } : undefined}
+              onError={() => setImgError(true)}
+            />
+          )}
         </div>
 
         {/* Current badge */}
