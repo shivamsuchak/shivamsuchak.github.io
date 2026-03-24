@@ -250,11 +250,13 @@ function ExperienceCard({
   index,
   onSelect,
   onHover,
+  isTouch,
 }: {
   exp: Experience
   index: number
   onSelect: (id: string) => void
   onHover: (hovered: boolean) => void
+  isTouch: boolean
 }) {
   const [isHovered, setIsHovered] = useState(false)
   const [imgError, setImgError] = useState(false)
@@ -262,7 +264,7 @@ function ExperienceCard({
   return (
     <motion.div
       className="group"
-      style={{ cursor: 'none' }}
+      style={{ cursor: isTouch ? 'pointer' : 'none' }}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
@@ -271,8 +273,8 @@ function ExperienceCard({
         ease: [0.22, 1, 0.36, 1],
         delay: index * 0.1,
       }}
-      onMouseEnter={() => { setIsHovered(true); onHover(true) }}
-      onMouseLeave={() => { setIsHovered(false); onHover(false) }}
+      onMouseEnter={isTouch ? undefined : () => { setIsHovered(true); onHover(true) }}
+      onMouseLeave={isTouch ? undefined : () => { setIsHovered(false); onHover(false) }}
       onClick={() => onSelect(exp.id)}
     >
       {/* Image area — bezel wrapper (no overflow-hidden so shine shows) */}
@@ -414,7 +416,7 @@ function TakeoverOverlay({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -464,7 +466,7 @@ function TakeoverOverlay({
       </motion.button>
 
       {/* Content */}
-      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center px-8 md:flex-row md:items-center md:gap-16 lg:gap-24">
+      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center px-6 py-16 sm:px-8 md:flex-row md:items-center md:gap-16 md:py-0 lg:gap-24">
         {/* Left: Logo */}
         <motion.div
           className="mb-10 flex w-full items-center justify-center md:mb-0 md:w-1/2"
@@ -666,15 +668,24 @@ function SectionTitle({ text }: { text: string }) {
 
 /* ─── Main Export ─── */
 
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+  return isTouch
+}
+
 export default function ExperienceSection() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [anyCardHovered, setAnyCardHovered] = useState(false)
   const selectedExp = EXPERIENCES.find((e) => e.id === selectedId) || null
+  const isTouch = useIsTouchDevice()
 
   return (
     <>
-      {/* Custom cursor */}
-      <ViewDetailsCursor isVisible={anyCardHovered && !selectedId} />
+      {/* Custom cursor — hidden on touch */}
+      {!isTouch && <ViewDetailsCursor isVisible={anyCardHovered && !selectedId} />}
 
       <section
         id="experience"
@@ -702,6 +713,7 @@ export default function ExperienceSection() {
                 index={i}
                 onSelect={setSelectedId}
                 onHover={setAnyCardHovered}
+                isTouch={isTouch}
               />
             ))}
           </div>

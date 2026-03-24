@@ -221,16 +221,16 @@ function InteractiveParticles({ count, color, size, opacity }: {
 
 /* ─── Full-section background scene ─── */
 
-function BackgroundScene() {
+function BackgroundScene({ isTouch }: { isTouch: boolean }) {
+  const lo = isTouch
   return (
     <>
       {/* Violet — main layer */}
-      <InteractiveParticles count={500} color="#c4b5fd" size={0.03} opacity={0.5} />
+      <InteractiveParticles count={lo ? 150 : 500} color="#c4b5fd" size={0.03} opacity={0.5} />
       {/* Cyan — secondary layer */}
-      <InteractiveParticles count={300} color="#67e8f9" size={0.022} opacity={0.3} />
+      <InteractiveParticles count={lo ? 80 : 300} color="#67e8f9" size={0.022} opacity={0.3} />
       {/* White dust */}
-      <InteractiveParticles count={200} color="#ffffff" size={0.015} opacity={0.15} />
-      {/* Cursor trail removed */}
+      <InteractiveParticles count={lo ? 50 : 200} color="#ffffff" size={0.015} opacity={0.15} />
     </>
   )
 }
@@ -263,10 +263,20 @@ const SOCIAL_LINKS = [
 
 /* ─── Main Export ─── */
 
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+  return isTouch
+}
+
 export default function IntroSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const isTouch = useIsTouchDevice()
 
   useEffect(() => {
+    if (isTouch) return
     const handleMove = (e: MouseEvent) => {
       const el = sectionRef.current
       if (!el) return
@@ -284,14 +294,14 @@ export default function IntroSection() {
       window.removeEventListener('mousemove', handleMove)
       window.removeEventListener('mouseleave', handleLeave)
     }
-  }, [])
+  }, [isTouch])
 
   return (
     <section ref={sectionRef} className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       {/* Background layer: particles + faint sphere */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-          <BackgroundScene />
+          <BackgroundScene isTouch={isTouch} />
           {/* Faint sphere centered behind text */}
           <ambientLight intensity={0.15} />
           <directionalLight position={[5, 5, 5]} intensity={0.4} color="#e9d5ff" />
@@ -299,7 +309,7 @@ export default function IntroSection() {
           <pointLight position={[4, 2, -2]} intensity={0.3} color="#22d3ee" />
           <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.8} floatingRange={[-0.1, 0.1]}>
             <mesh scale={2.5}>
-              <sphereGeometry args={[1, 64, 64]} />
+              <sphereGeometry args={[1, isTouch ? 32 : 64, isTouch ? 32 : 64]} />
               <MeshDistortMaterial
                 color="#a78bfa"
                 emissive="#7c3aed"

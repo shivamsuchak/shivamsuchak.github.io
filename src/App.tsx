@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useTheme } from './context/ThemeContext'
 import Navbar from './components/Navbar'
@@ -227,36 +227,48 @@ function MagneticChar({ char, index, theme }: { char: string; index: number; the
   )
 }
 
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+  return isTouch
+}
+
 function App() {
   const { theme } = useTheme()
+  const isTouch = useIsTouchDevice()
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   const springX = useSpring(cursorX, CURSOR_SPRING)
   const springY = useSpring(cursorY, CURSOR_SPRING)
 
   useEffect(() => {
+    if (isTouch) return
     const move = (e: MouseEvent) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
     }
     window.addEventListener('mousemove', move, { passive: true })
     return () => window.removeEventListener('mousemove', move)
-  }, [cursorX, cursorY])
+  }, [cursorX, cursorY, isTouch])
 
   return (
-    <div className="min-h-screen overflow-x-hidden transition-colors duration-300" style={{ background: 'var(--bg-primary)' }}>
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'var(--bg-primary)', overflowX: 'clip' }}>
       <Navbar />
 
-      {/* Custom cursor */}
-      <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[999] h-4 w-4 rounded-full bg-white mix-blend-difference"
-        style={{
-          x: springX,
-          y: springY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-      />
+      {/* Custom cursor — hidden on touch devices */}
+      {!isTouch && (
+        <motion.div
+          className="pointer-events-none fixed top-0 left-0 z-[999] h-4 w-4 rounded-full bg-white mix-blend-difference"
+          style={{
+            x: springX,
+            y: springY,
+            translateX: '-50%',
+            translateY: '-50%',
+          }}
+        />
+      )}
 
       {/* Hero */}
       <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-12">
@@ -292,7 +304,7 @@ function App() {
           </motion.p>
 
           {/* Bento info cards */}
-          <div className="relative mt-10 grid w-full max-w-4xl grid-cols-3 gap-4 sm:mt-14 sm:gap-5">
+          <div className="relative mt-10 grid w-full max-w-4xl grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-5">
             {/* Radial glow behind cards */}
             <div aria-hidden="true" className="pointer-events-none absolute -inset-12 -z-10 rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(167,139,250,0.12)_0%,transparent_70%)]" />
             {[

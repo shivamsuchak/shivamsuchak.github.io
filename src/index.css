@@ -81,6 +81,13 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Restore default cursor on touch / coarse-pointer devices */
+@media (pointer: coarse) {
+  body, body * {
+    cursor: auto !important;
+  }
+}
+
 ::selection {
   background: var(--selection-bg);
   color: var(--selection-color);

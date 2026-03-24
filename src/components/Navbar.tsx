@@ -194,10 +194,19 @@ function ThemeToggle({
   )
 }
 
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+  return isTouch
+}
+
 export default function Navbar() {
   const [active, setActive] = useState('Home')
   const mouseX = useMotionValue(Infinity)
   const { theme, toggleTheme } = useTheme()
+  const isTouch = useIsTouchDevice()
 
   useEffect(() => {
     const sectionMap: [string, string][] = [
@@ -227,8 +236,8 @@ export default function Navbar() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
-      onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
+      onMouseMove={isTouch ? undefined : (e) => mouseX.set(e.pageX)}
+      onMouseLeave={isTouch ? undefined : () => mouseX.set(Infinity)}
     >
       {NAV_ITEMS.map((item) => (
         <DockItem

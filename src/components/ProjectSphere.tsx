@@ -356,6 +356,14 @@ function ProjectDetail({
 
 /* ─── Main Component ─── */
 
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+  return isTouch
+}
+
 export default function ProjectSphere({ projects }: ProjectSphereProps) {
   const sphereRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -368,6 +376,7 @@ export default function ProjectSphere({ projects }: ProjectSphereProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const isVisibleRef = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
+  const isTouch = useIsTouchDevice()
 
   const tiles = useMemo(() => generateTilePositions(projects), [projects])
 
@@ -464,7 +473,7 @@ export default function ProjectSphere({ projects }: ProjectSphereProps) {
           Curated Work
         </h2>
         <p className="max-w-md text-sm" style={{ color: 'var(--text-muted)' }}>
-          Drag to explore &middot; Click a tile for details
+          {isTouch ? 'Swipe to explore \u00B7 Tap a tile for details' : 'Drag to explore \u00B7 Click a tile for details'}
         </p>
       </motion.div>
 
