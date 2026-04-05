@@ -186,7 +186,7 @@ export default function SkillsSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
         >
           <span style={{ color: 'var(--text-primary)' }}>The Secret </span>
-          <span className="bg-gradient-to-r from-pink-500 via-rose-400 to-amber-400 bg-clip-text italic text-transparent">
+          <span className="bg-gradient-to-r from-indigo-400 via-rose-400 to-amber-300 bg-clip-text italic text-transparent">
             Sauce
           </span>
         </motion.h2>

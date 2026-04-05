@@ -13,7 +13,7 @@ const INTERESTS = [
 /* Gradient-highlighted span helper */
 function Hl({ children }: { children: React.ReactNode }) {
   return (
-    <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text font-medium text-transparent">
+    <span className="bg-gradient-to-r from-indigo-400 via-rose-400 to-amber-300 bg-clip-text font-medium text-transparent">
       {children}
     </span>
   )
@@ -26,7 +26,7 @@ function HlLink({ children, href }: { children: React.ReactNode; href: string })
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text font-medium text-transparent transition-opacity hover:opacity-80"
+      className="bg-gradient-to-r from-indigo-400 via-rose-400 to-amber-300 bg-clip-text font-medium text-transparent transition-opacity hover:opacity-80"
     >
       {children}
     </a>
@@ -81,17 +81,17 @@ export default function AboutSection() {
           className="relative flex h-36 w-36 items-center justify-center sm:h-44 sm:w-44"
           style={{ y: crystalY, rotate: crystalRotate }}
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500/10 via-transparent to-pink-500/10 blur-2xl" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500/10 via-transparent to-rose-500/8 blur-2xl" />
           <div
             className="absolute inset-6 rotate-45 rounded-2xl bg-gradient-to-br from-neutral-800/50 via-neutral-900/80 to-black"
-            style={{ boxShadow: '0 0 40px rgba(139,92,246,0.08)' }}
+            style={{ boxShadow: '0 0 40px rgba(124,106,239,0.06)' }}
           />
-          <div className="absolute inset-10 rotate-45 rounded-xl bg-gradient-to-tr from-violet-900/20 via-neutral-900 to-neutral-950" />
+          <div className="absolute inset-10 rotate-45 rounded-xl bg-gradient-to-tr from-indigo-900/20 via-neutral-900 to-neutral-950" />
           <div className="absolute inset-14 rotate-45 rounded-lg bg-gradient-to-br from-neutral-800/30 via-neutral-950 to-black" />
-          <div className="absolute top-1/4 left-1/3 h-10 w-[2px] rotate-[50deg] bg-gradient-to-b from-violet-400/20 to-transparent blur-[1px]" />
-          <div className="absolute top-1/3 right-1/4 h-8 w-[2px] rotate-[-30deg] bg-gradient-to-b from-pink-400/15 to-transparent blur-[1px]" />
-          <div className="absolute bottom-1/4 left-1/4 h-6 w-[2px] rotate-[70deg] bg-gradient-to-b from-amber-400/10 to-transparent blur-[1px]" />
-          <div className="absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-400/40 shadow-[0_0_12px_rgba(139,92,246,0.3)]" />
+          <div className="absolute top-1/4 left-1/3 h-10 w-[2px] rotate-[50deg] bg-gradient-to-b from-indigo-400/20 to-transparent blur-[1px]" />
+          <div className="absolute top-1/3 right-1/4 h-8 w-[2px] rotate-[-30deg] bg-gradient-to-b from-rose-400/15 to-transparent blur-[1px]" />
+          <div className="absolute bottom-1/4 left-1/4 h-6 w-[2px] rotate-[70deg] bg-gradient-to-b from-amber-300/10 to-transparent blur-[1px]" />
+          <div className="absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400/40 shadow-[0_0_12px_rgba(124,106,239,0.25)]" />
         </motion.div>
 
         <div style={{ height: '5rem' }} aria-hidden="true" />
@@ -118,7 +118,7 @@ export default function AboutSection() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
         >
           A Little Bit About{' '}
-          <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text italic text-transparent">
+          <span className="bg-gradient-to-r from-indigo-400 via-rose-400 to-amber-300 bg-clip-text italic text-transparent">
             Me
           </span>
         </motion.h2>
@@ -139,8 +139,8 @@ export default function AboutSection() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="mb-5 flex items-center gap-2.5 pb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-500/10">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-violet-400"><circle cx="12" cy="12" r="10" /><path d="m8 12 3 3 5-6" /></svg>
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-indigo-400"><circle cx="12" cy="12" r="10" /><path d="m8 12 3 3 5-6" /></svg>
               </div>
               <span className="text-sm font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--text-primary)' }}>
                 Bridging Research & Scalable AI
@@ -165,7 +165,7 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(139,92,246,0.06)_0%,transparent_70%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(124,106,239,0.05)_0%,transparent_70%)]" />
             <motion.div
               className="relative z-10"
               animate={{ y: [0, -8, 0] }}
@@ -174,7 +174,7 @@ export default function AboutSection() {
               <img
                 src="/Attack On Titan Capitan Levi Background Removed.png"
                 alt="Levi Ackerman"
-                className="h-[280px] w-auto object-contain drop-shadow-[0_0_24px_rgba(139,92,246,0.12)] sm:h-[320px]"
+                className="h-[280px] w-auto object-contain drop-shadow-[0_0_24px_rgba(124,106,239,0.10)] sm:h-[320px]"
               />
             </motion.div>
           </motion.div>
@@ -190,7 +190,7 @@ export default function AboutSection() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="mb-4 flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-violet-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-indigo-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
               <span className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--text-primary)' }}>Research</span>
             </div>
             <p className="text-[14px] leading-[1.6] " style={{ color: 'var(--text-secondary)' }}>
@@ -236,7 +236,7 @@ export default function AboutSection() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="mb-4 flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-pink-400"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-rose-400"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
               <span className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--text-primary)' }}>What I Build</span>
             </div>
             <p className="text-[14px] leading-[1.6] " style={{ color: 'var(--text-secondary)' }}>
@@ -263,7 +263,7 @@ export default function AboutSection() {
               {INTERESTS.map((item, i) => (
                 <motion.span
                   key={item}
-                  className="flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[13px] font-medium shadow-[0_0_12px_rgba(139,92,246,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(139,92,246,0.12)]"
+                  className="flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[13px] font-medium shadow-[0_0_12px_rgba(124,106,239,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(124,106,239,0.10)]"
                   style={{ background: 'var(--bg-card-hover)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -275,8 +275,8 @@ export default function AboutSection() {
                   }}
                 >
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-40" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-violet-400" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-40" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-400" />
                   </span>
                   {item}
                 </motion.span>
@@ -295,7 +295,7 @@ export default function AboutSection() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="mb-4 flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-emerald-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-teal-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
               <span className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--text-primary)' }}>Community & Leadership</span>
             </div>
             <p className="text-[14px] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>

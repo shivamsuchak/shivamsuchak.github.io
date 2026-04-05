@@ -105,9 +105,9 @@ function DockItem({
         style={{
           width,
           height: width,
-          background: active ? 'rgba(139,92,246,0.2)' : 'var(--bg-card)',
-          color: active ? '#c4b5fd' : 'var(--text-muted)',
-          boxShadow: active ? '0 10px 15px -3px rgba(139,92,246,0.1)' : 'none',
+          background: active ? 'rgba(124,106,239,0.15)' : 'var(--bg-card)',
+          color: active ? '#a494ff' : 'var(--text-muted)',
+          boxShadow: active ? '0 10px 15px -3px rgba(124,106,239,0.08)' : 'none',
         }}
       >
         {item.icon}
@@ -121,7 +121,7 @@ function DockItem({
       {/* Active dot */}
       {active && (
         <motion.div
-          className="mt-1 h-1 w-1 rounded-full bg-violet-400"
+          className="mt-1 h-1 w-1 rounded-full bg-indigo-400"
           layoutId="dock-dot"
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         />

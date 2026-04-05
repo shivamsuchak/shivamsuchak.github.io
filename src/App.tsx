@@ -177,7 +177,7 @@ function MagneticChar({ char, index, theme }: { char: string; index: number; the
   const color = useTransform(
     springProximity,
     [0, 1],
-    [theme === 'dark' ? 'rgb(250, 250, 250)' : 'rgb(24, 24, 27)', 'rgb(167, 139, 250)']
+    [theme === 'dark' ? 'rgb(240, 240, 245)' : 'rgb(26, 26, 46)', 'rgb(124, 106, 239)']
   )
 
   const handleMove = useCallback(
@@ -277,7 +277,7 @@ function App() {
           aria-hidden="true"
           className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          <div className="h-[300px] w-[300px] rounded-full bg-violet-700/15 blur-[150px] sm:h-[400px] sm:w-[600px]" />
+          <div className="h-[300px] w-[300px] rounded-full bg-indigo-600/12 blur-[150px] sm:h-[400px] sm:w-[600px]" />
         </div>
 
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center">
@@ -297,7 +297,7 @@ function App() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
           >
             I don&apos;t just build AI models, I build AI products that drive{' '}
-            <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text italic text-transparent">
+            <span className="bg-gradient-to-r from-indigo-400 via-rose-400 to-amber-300 bg-clip-text italic text-transparent">
               intelligent decisions
             </span>
             .
@@ -306,7 +306,7 @@ function App() {
           {/* Bento info cards */}
           <div className="relative mt-10 grid w-full max-w-4xl grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-5">
             {/* Radial glow behind cards */}
-            <div aria-hidden="true" className="pointer-events-none absolute -inset-12 -z-10 rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(167,139,250,0.12)_0%,transparent_70%)]" />
+            <div aria-hidden="true" className="pointer-events-none absolute -inset-12 -z-10 rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(124,106,239,0.10)_0%,transparent_70%)]" />
             {[
               { label: 'Location', value: 'Berlin, Germany', dot: false },
               { label: 'Role', value: 'Building GenAI Products', dot: false },

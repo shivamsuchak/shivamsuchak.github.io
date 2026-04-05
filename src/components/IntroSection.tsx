@@ -95,7 +95,7 @@ function ShimmerChar({
     setProximity(dist < radius ? 1 - dist / radius : 0)
   }, [mousePos])
 
-  const hoverColor = `rgb(${167 + proximity * 30}, ${139 + proximity * 50}, ${250})`
+  const hoverColor = `rgb(${124 + proximity * 40}, ${106 + proximity * 50}, ${239})`
   const isNearCursor = proximity > 0
 
   return (
@@ -226,11 +226,11 @@ function BackgroundScene({ isTouch }: { isTouch: boolean }) {
   return (
     <>
       {/* Violet — main layer */}
-      <InteractiveParticles count={lo ? 150 : 500} color="#c4b5fd" size={0.03} opacity={0.5} />
+      <InteractiveParticles count={lo ? 150 : 500} color="#a494ff" size={0.03} opacity={0.45} />
       {/* Cyan — secondary layer */}
-      <InteractiveParticles count={lo ? 80 : 300} color="#67e8f9" size={0.022} opacity={0.3} />
+      <InteractiveParticles count={lo ? 80 : 300} color="#5eead4" size={0.022} opacity={0.25} />
       {/* White dust */}
-      <InteractiveParticles count={lo ? 50 : 200} color="#ffffff" size={0.015} opacity={0.15} />
+      <InteractiveParticles count={lo ? 50 : 200} color="#e0e0f0" size={0.015} opacity={0.12} />
     </>
   )
 }
@@ -304,16 +304,16 @@ export default function IntroSection() {
           <BackgroundScene isTouch={isTouch} />
           {/* Faint sphere centered behind text */}
           <ambientLight intensity={0.15} />
-          <directionalLight position={[5, 5, 5]} intensity={0.4} color="#e9d5ff" />
-          <pointLight position={[-4, -2, 3]} intensity={0.4} color="#7c3aed" />
-          <pointLight position={[4, 2, -2]} intensity={0.3} color="#22d3ee" />
+          <directionalLight position={[5, 5, 5]} intensity={0.4} color="#d4c8ff" />
+          <pointLight position={[-4, -2, 3]} intensity={0.4} color="#6450dc" />
+          <pointLight position={[4, 2, -2]} intensity={0.3} color="#2dd4bf" />
           <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.8} floatingRange={[-0.1, 0.1]}>
             <mesh scale={2.5}>
               <sphereGeometry args={[1, isTouch ? 32 : 64, isTouch ? 32 : 64]} />
               <MeshDistortMaterial
-                color="#a78bfa"
-                emissive="#7c3aed"
-                emissiveIntensity={0.3}
+                color="#7c6aef"
+                emissive="#6450dc"
+                emissiveIntensity={0.25}
                 roughness={0.2}
                 metalness={0.9}
                 distort={0.15}
@@ -332,7 +332,7 @@ export default function IntroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
-        <div className="h-[500px] w-[500px] rounded-full bg-violet-700/10 blur-[160px]" />
+        <div className="h-[500px] w-[500px] rounded-full bg-indigo-600/8 blur-[160px]" />
       </div>
 
       {/* Content: text + social */}
@@ -362,7 +362,7 @@ export default function IntroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.label}
-              className="bezel flex h-12 w-12 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-200 hover:border-violet-500/[0.3]"
+              className="bezel flex h-12 w-12 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-200 hover:border-indigo-400/[0.3]"
               style={{ background: 'var(--bg-card)', color: 'var(--text-muted)' }}
             >
               <link.icon />

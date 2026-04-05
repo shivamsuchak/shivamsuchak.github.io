@@ -199,7 +199,7 @@ export default function Footer() {
           <p>
             <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>Contact</span><br />
             If you have any questions about this policy, reach out at{' '}
-            <a href="mailto:shivam.suchak@gmail.com" className="text-violet-400 hover:underline">
+            <a href="mailto:shivam.suchak@gmail.com" className="text-indigo-400 hover:underline">
               shivam.suchak@gmail.com
             </a>.
           </p>
@@ -240,7 +240,7 @@ export default function Footer() {
           <p>
             <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>Contact</span><br />
             For questions regarding these terms, email{' '}
-            <a href="mailto:shivam.suchak@gmail.com" className="text-violet-400 hover:underline">
+            <a href="mailto:shivam.suchak@gmail.com" className="text-indigo-400 hover:underline">
               shivam.suchak@gmail.com
             </a>.
           </p>
@@ -274,7 +274,7 @@ export default function Footer() {
                   target={s.href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:scale-110 hover:shadow-[0_0_16px_rgba(139,92,246,0.15)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:scale-110 hover:shadow-[0_0_16px_rgba(124,106,239,0.12)]"
                   style={{ border: '1px solid var(--border-subtle)', background: 'var(--bg-card)', color: 'var(--text-muted)' }}
                 >
                   {s.icon}

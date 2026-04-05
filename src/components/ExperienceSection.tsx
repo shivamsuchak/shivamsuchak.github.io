@@ -324,7 +324,7 @@ function ExperienceCard({
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style={{
             background:
-              'radial-gradient(circle at 50% 50%, rgba(167,139,250,0.08) 0%, transparent 70%)',
+              'radial-gradient(circle at 50% 50%, rgba(124,106,239,0.06) 0%, transparent 70%)',
           }}
         />
         </div>
@@ -699,7 +699,7 @@ export default function ExperienceSection() {
               aria-hidden="true"
               className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             >
-              <div className="h-[200px] w-[400px] rounded-full bg-violet-700/15 blur-[120px]" />
+              <div className="h-[200px] w-[400px] rounded-full bg-indigo-600/12 blur-[120px]" />
             </div>
             <SectionTitle text="Experience" />
           </div>
